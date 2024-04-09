@@ -1,4 +1,5 @@
 # 🔎 GPT Researcher
+
 [![Official Website](https://img.shields.io/badge/Official%20Website-tavily.com-blue?style=for-the-badge&logo=world&logoColor=white)](https://tavily.com)
 [![Discord Follow](https://dcbadge.vercel.app/api/server/2pFkc83fRq?style=for-the-badge)](https://discord.com/invite/2pFkc83fRq)
 
@@ -8,12 +9,17 @@
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/assafelovic/gpt-researcher?style=for-the-badge&color=orange
 
--  [English](README.md)
--  [中文](README-zh_CN.md)
+- [English](README.md)
+- [中文](README-zh_CN.md)
 
-**GPT Researcher is an autonomous agent designed for comprehensive online research on a variety of tasks.** 
+### Changes
+
+- Modified OpenAI API to allow for api key to be passed in as a parameter instead of relying on environment variables.
+
+**GPT Researcher is an autonomous agent designed for comprehensive online research on a variety of tasks.**
 
 The agent can produce detailed, factual and unbiased research reports, with customization options for focusing on relevant resources, outlines, and lessons. Inspired by the recent [Plan-and-Solve](https://arxiv.org/abs/2305.04091) and [RAG](https://arxiv.org/abs/2005.11401) papers, GPT Researcher addresses issues of speed, determinism and reliability, offering a more stable performance and increased speed through parallelized agent work, as opposed to synchronous operations.
 
@@ -24,33 +30,37 @@ The agent can produce detailed, factual and unbiased research reports, with cust
 - To form objective conclusions for manual research tasks can take time, sometimes weeks to find the right resources and information.
 - Current LLMs are trained on past and outdated information, with heavy risks of hallucinations, making them almost irrelevant for research tasks.
 - Solutions that enable web search (such as ChatGPT + Web Plugin), only consider limited resources and content that in some cases result in superficial conclusions or biased answers.
-- Using only a selection of resources can create bias in determining the right conclusions for research questions or tasks. 
+- Using only a selection of resources can create bias in determining the right conclusions for research questions or tasks.
 
 ## Architecture
-The main idea is to run "planner" and "execution" agents, whereas the planner generates questions to research, and the execution agents seek the most related information based on each generated research question. Finally, the planner filters and aggregates all related information and creates a research report. <br /> <br /> 
+
+The main idea is to run "planner" and "execution" agents, whereas the planner generates questions to research, and the execution agents seek the most related information based on each generated research question. Finally, the planner filters and aggregates all related information and creates a research report. <br /> <br />
 The agents leverage both gpt3.5-turbo and gpt-4-turbo (128K context) to complete a research task. We optimize for costs using each only when necessary. **The average research task takes around 3 minutes to complete, and costs ~$0.1.**
 
 <div align="center">
 <img align="center" height="500" src="https://cowriter-images.s3.amazonaws.com/architecture.png">
 </div>
 
-
 More specifically:
-* Create a domain specific agent based on research query or task.
-* Generate a set of research questions that together form an objective opinion on any given task. 
-* For each research question, trigger a crawler agent that scrapes online resources for information relevant to the given task.
-* For each scraped resources, summarize based on relevant information and keep track of its sources.
-* Finally, filter and aggregate all summarized sources and generate a final research report.
+
+- Create a domain specific agent based on research query or task.
+- Generate a set of research questions that together form an objective opinion on any given task.
+- For each research question, trigger a crawler agent that scrapes online resources for information relevant to the given task.
+- For each scraped resources, summarize based on relevant information and keep track of its sources.
+- Finally, filter and aggregate all summarized sources and generate a final research report.
 
 ## Demo
+
 https://github.com/assafelovic/gpt-researcher/assets/13554167/d5df04a9-631a-4509-aa55-2049b5a9e9bc
 
 ## Tutorials
- - [How it Works](https://docs.tavily.com/blog/building-gpt-researcher)
- - [How to Install](https://www.loom.com/share/04ebffb6ed2a4520a27c3e3addcdde20?sid=da1848e8-b1f1-42d1-93c3-5b0b9c3b24ea)
- - [Live Demo](https://www.loom.com/share/6a3385db4e8747a1913dd85a7834846f?sid=a740fd5b-2aa3-457e-8fb7-86976f59f9b8)
+
+- [How it Works](https://docs.tavily.com/blog/building-gpt-researcher)
+- [How to Install](https://www.loom.com/share/04ebffb6ed2a4520a27c3e3addcdde20?sid=da1848e8-b1f1-42d1-93c3-5b0b9c3b24ea)
+- [Live Demo](https://www.loom.com/share/6a3385db4e8747a1913dd85a7834846f?sid=a740fd5b-2aa3-457e-8fb7-86976f59f9b8)
 
 ## Features
+
 - 📝 Generate research, outlines, resources and lessons reports
 - 📜 Can generate long and detailed research reports (over 2K words)
 - 🌐 Aggregates over 20 web sources per research to form objective and factual conclusions
@@ -69,6 +79,7 @@ Please see [here](https://docs.tavily.com/docs/gpt-researcher/getting-started) f
 - Reference (full API docs)
 
 ## Quickstart
+
 > **Step 0** - Install Python 3.11 or later. [See here](https://www.tutorialsteacher.com/python/install-python) for a step-by-step guide.
 
 <br />
@@ -84,7 +95,7 @@ cd gpt-researcher
 
 > **Step 2** - 🌐🌀 Virtual Environment 🛡️.
 
-#### *Establishing the Virtual Environment with Activate/Deactivate configuration*
+#### _Establishing the Virtual Environment with Activate/Deactivate configuration_
 
 Create a virtual environment using the `venv` package with the environment name `<your_name>`, for example, `env`. Execute the following command in the PowerShell/CMD terminal:
 
@@ -104,7 +115,7 @@ To deactivate the virtual environment, run the following deactivation script in 
 deactivate
 ```
 
-#### *Install the dependencies for a Virtual environment*
+#### _Install the dependencies for a Virtual environment_
 
 After activating the `env` environment, install dependencies using the `requirements.txt` file with the following command:
 
@@ -116,7 +127,7 @@ python -m pip install -r requirements.txt
 
 > **Step 3** - 📜🎭 Poetry 📝
 
-#### *Establishing the Poetry dependencies and virtual environment with Poetry version `~1.7.1`*
+#### _Establishing the Poetry dependencies and virtual environment with Poetry version `~1.7.1`_
 
 Install project dependencies and simultaneously create a virtual environment for the specified project. By executing this command, Poetry reads the project's "pyproject.toml" file to determine the required dependencies and their versions, ensuring a consistent and isolated development environment. The virtual environment allows for a clean separation of project-specific dependencies, preventing conflicts with system-wide packages and enabling more straightforward dependency management throughout the project's lifecycle.
 
@@ -124,7 +135,7 @@ Install project dependencies and simultaneously create a virtual environment for
 poetry install
 ```
 
-#### *Activate the virtual environment associated with a Poetry project*
+#### _Activate the virtual environment associated with a Poetry project_
 
 By running this command, the user enters a shell session within the isolated environment associated with the project, providing a dedicated space for development and execution. This virtual environment ensures that the project dependencies are encapsulated, avoiding conflicts with system-wide packages. Activating the Poetry shell is essential for seamlessly working on a project, as it ensures that the correct versions of dependencies are used and provides a controlled environment conducive to efficient development and testing.
 
@@ -150,12 +161,13 @@ OPENAI_API_KEY={Your OpenAI API Key here}
 TAVILY_API_KEY={Your Tavily API Key here}
 ```
 
-- **For LLM, we recommend [OpenAI GPT](https://platform.openai.com/docs/guides/gpt)**, but you can use any other LLM model (including open sources) supported by [Langchain Adapter](https://python.langchain.com/docs/guides/adapters/openai), simply change the llm model and provider in config/config.py. 
+- **For LLM, we recommend [OpenAI GPT](https://platform.openai.com/docs/guides/gpt)**, but you can use any other LLM model (including open sources) supported by [Langchain Adapter](https://python.langchain.com/docs/guides/adapters/openai), simply change the llm model and provider in config/config.py.
 - **For search engine, we recommend [Tavily Search API](https://app.tavily.com)**, but you can also refer to other search engines of your choice by changing the search provider in config/config.py to `"duckduckgo"`, `"googleAPI"`, `"googleSerp"`, or `"searx"`. Then add the corresponding env API key as seen in the config.py file.
 
 <br />
 
-> **Step 5** - Launch the FastAPI application agent on a *Virtual Environment or Poetry* setup by executing the following command:
+> **Step 5** - Launch the FastAPI application agent on a _Virtual Environment or Poetry_ setup by executing the following command:
+
 ```bash
 python -m uvicorn main:app --reload
 ```
@@ -169,11 +181,13 @@ python -m uvicorn main:app --reload
 To learn how to get started with Docker or to learn more about the features and services check out the [documentation](https://docs.tavily.com) page.
 
 ## 🚀 Contributing
+
 We highly welcome contributions! Please check out [contributing](CONTRIBUTING.md) if you're interested.
 
 Please check out our [roadmap](https://trello.com/b/3O7KBePw/gpt-researcher-roadmap) page and reach out to us via our [Discord community](https://discord.gg/2pFkc83fRq) if you're interested in joining our mission.
 
 ## ✉️ Support / Contact us
+
 - [Community Discord](https://discord.gg/spBgZmm3Xe)
 - Our email: assafelovic@gmail.com
 
@@ -182,6 +196,7 @@ Please check out our [roadmap](https://trello.com/b/3O7KBePw/gpt-researcher-road
 This project, GPT Researcher, is an experimental application and is provided "as-is" without any warranty, express or implied. We are sharing codes for academic purposes under the MIT license. Nothing herein is academic advice, and NOT a recommendation to use in academic or research papers.
 
 Our view on unbiased research claims:
+
 1. The whole point of our scraping system is to reduce incorrect fact. How? The more sites we scrape the less chances of incorrect data. We are scraping 20 per research, the chances that they are all wrong is extremely low.
 2. We do not aim to eliminate biases; we aim to reduce it as much as possible. **We are here as a community to figure out the most effective human/llm interactions.**
 3. In research, people also tend towards biases as most have already opinions on the topics they research about. This tool scrapes many opinions and will evenly explain diverse views that a biased person would never have read.
