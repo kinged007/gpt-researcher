@@ -17,7 +17,7 @@ class SearxSearch():
             query:
         """
         self.query = query
-        self.api_key = cfg.searx_url if hasattr(cfg, 'searx_url') else self.get_api_key()
+        self.api_key = cfg.searx_url if hasattr(cfg, 'searx_url') and cfg.searx_url else self.get_api_key()
         self.client = TavilyClient(self.api_key)
 
     def get_api_key(self):

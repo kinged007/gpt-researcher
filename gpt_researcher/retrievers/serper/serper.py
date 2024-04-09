@@ -17,7 +17,7 @@ class SerperSearch():
             query:
         """
         self.query = query
-        self.api_key = cfg.serper_api_key if hasattr(cfg, 'serper_api_key') else self.get_api_key()
+        self.api_key = cfg.serper_api_key if hasattr(cfg, 'serper_api_key') and cfg.serper_api_key else self.get_api_key()
 
     def get_api_key(self):
         """

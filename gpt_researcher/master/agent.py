@@ -24,7 +24,8 @@ class GPTResearcher:
         role=None,
         parent_query: str = "",
         subtopics: list = [],
-        visited_urls: set = set()
+        visited_urls: set = set(),
+        config_dict: dict = {},
     ):
         """
         Initialize the GPT Researcher class.
@@ -45,11 +46,11 @@ class GPTResearcher:
         self.role = role
         self.report_type = report_type
         self.websocket = websocket
-        self.cfg = Config(config_path)
+        self.cfg = Config(**config_dict) if config_dict else Config(config_path)
         self.retriever = get_retriever(self.cfg.retriever)
         self.context = []
         self.source_urls = source_urls
-        self.memory = Memory(self.cfg.embedding_provider)
+        self.memory = Memory(self.cfg.embedding_provider, self.cfg)
         self.visited_urls = visited_urls
 
         # Only relevant for DETAILED REPORTS
@@ -66,7 +67,7 @@ class GPTResearcher:
         Runs the GPT Researcher to conduct research
         """
         print(f"🔎 Running research for '{self.query}'...")
-        
+
         # Generate Agent
         if not (self.agent and self.role):
             self.agent, self.role = await choose_agent(self.query, self.cfg)
@@ -194,7 +195,7 @@ class GPTResearcher:
             Summary
         """
         # Get Urls
-        retriever = self.retriever(sub_query)
+        retriever = self.retriever(sub_query, self.cfg)
         search_results = retriever.search(
             max_results=self.cfg.max_search_results_per_query)
         new_search_urls = await self.get_new_urls([url.get("href") for url in search_results])

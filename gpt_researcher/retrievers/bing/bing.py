@@ -17,7 +17,7 @@ class BingSearch():
             query:
         """
         self.query = query
-        self.api_key = cfg.bing_api_key if hasattr(cfg, 'bing_api_key') else self.get_api_key()
+        self.api_key = cfg.bing_api_key if hasattr(cfg, 'bing_api_key') and cfg.bing_api_key else self.get_api_key()
         self.api_key = self.get_api_key()
 
     def get_api_key(self):

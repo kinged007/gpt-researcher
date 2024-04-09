@@ -13,9 +13,9 @@ class Memory:
             case "openai":
                 from langchain_openai import OpenAIEmbeddings
                 _embeddings = OpenAIEmbeddings(
-                    openai_api_key=cfg.openai_api_key if hasattr(cfg,'openai_api_key') else None,
-                    openai_api_base=cfg.openai_api_base if hasattr(cfg,'openai_api_base') else None,
-                    model=cfg.embedding_model if hasattr(cfg,'embedding_model') else 'text-embedding-ada-002',
+                    openai_api_key=cfg.openai_api_key if hasattr(cfg,'openai_api_key') and cfg.openai_api_key else None,
+                    openai_api_base=cfg.openai_api_base if hasattr(cfg,'openai_api_base') and cfg.openai_api_base else None,
+                    model=cfg.embedding_model if hasattr(cfg,'embedding_model') and cfg.embedding_model else 'text-embedding-ada-002',
                 )
             case "azureopenai":
                 from langchain_openai import AzureOpenAIEmbeddings

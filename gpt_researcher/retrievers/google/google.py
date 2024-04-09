@@ -18,8 +18,8 @@ class GoogleSearch:
             query:
         """
         self.query = query
-        self.api_key = cfg.google_api_key if hasattr(cfg, 'google_api_key') else self.get_api_key()
-        self.api_key = cfg.google_cx_key if hasattr(cfg, 'google_cx_key') else self.get_cx_key()
+        self.api_key = cfg.google_api_key if hasattr(cfg, 'google_api_key') and cfg.google_api_key else self.get_api_key()
+        self.api_key = cfg.google_cx_key if hasattr(cfg, 'google_cx_key') and cfg.google_cx_key else self.get_cx_key()
         # self.api_key = self.get_api_key() #GOOGLE_API_KEY
         # self.cx_key = self.get_cx_key() #GOOGLE_CX_KEY
         self.client = TavilyClient(self.api_key)
