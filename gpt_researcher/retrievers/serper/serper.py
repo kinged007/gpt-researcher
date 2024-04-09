@@ -10,14 +10,14 @@ class SerperSearch():
     """
     Google Serper Retriever
     """
-    def __init__(self, query):
+    def __init__(self, query, cfg=None):
         """
         Initializes the SerperSearch object
         Args:
             query:
         """
         self.query = query
-        self.api_key = self.get_api_key()
+        self.api_key = cfg.serper_api_key if hasattr(cfg, 'serper_api_key') else self.get_api_key()
 
     def get_api_key(self):
         """

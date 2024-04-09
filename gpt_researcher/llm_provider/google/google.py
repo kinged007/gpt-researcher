@@ -11,7 +11,8 @@ class GoogleProvider:
         self,
         model,
         temperature,
-        max_tokens
+        max_tokens,
+        cfg # Config object
     ):
         # May be extended to support more google models in the future
         self.model = "gemini-pro"
@@ -49,12 +50,12 @@ class GoogleProvider:
         """
         The function `convert_messages` converts messages based on their role into either SystemMessage
         or HumanMessage objects.
-        
+
         Args:
           messages: It looks like the code snippet you provided is a function called `convert_messages`
         that takes a list of messages as input and converts each message based on its role into either a
         `SystemMessage` or a `HumanMessage`.
-        
+
         Returns:
           The `convert_messages` function is returning a list of converted messages based on the input
         `messages`. The function checks the role of each message in the input list and creates a new

@@ -5,7 +5,7 @@ from langchain_openai import AzureChatOpenAI
 
 '''
 Please note:
-Needs additional env vars such as: 
+Needs additional env vars such as:
     AZURE_OPENAI_ENDPOINT  e.g. https://xxxx.openai.azure.com/",
     AZURE_OPENAI_API_KEY e.g "xxxxxxxxxxxxxxxxxxxxx",
     OPENAI_API_VERSION, e.g. "2024-03-01-preview" but needs to updated over time as API verison updates,
@@ -23,7 +23,8 @@ class AzureOpenAIProvider:
         self,
         deployment_name,
         temperature,
-        max_tokens
+        max_tokens,
+        cfg # Config object
     ):
         self.deployment_name = deployment_name
         self.temperature = temperature
@@ -81,5 +82,5 @@ class AzureOpenAIProvider:
                     else:
                         print(f"{Fore.GREEN}{paragraph}{Style.RESET_ALL}")
                     paragraph = ""
-                    
+
         return response

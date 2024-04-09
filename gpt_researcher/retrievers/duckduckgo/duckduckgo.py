@@ -6,7 +6,7 @@ class Duckduckgo:
     """
     Duckduckgo API Retriever
     """
-    def __init__(self, query):
+    def __init__(self, query, cfg=None):
         self.ddg = DDGS()
         self.query = query
 

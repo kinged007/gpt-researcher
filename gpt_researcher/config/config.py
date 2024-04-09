@@ -6,7 +6,7 @@ import os
 class Config:
     """Config class for GPT Researcher."""
 
-    def __init__(self, config_file: str = None):
+    def __init__(self, config_file: str = "", **kwargs):
         """Initialize the config class."""
         self.config_file = config_file if config_file else os.getenv('CONFIG_FILE')
         self.retriever = os.getenv('SEARCH_RETRIEVER', "tavily")
@@ -30,7 +30,25 @@ class Config:
         self.scraper = os.getenv("SCRAPER", "bs")
         self.max_subtopics = os.getenv("MAX_SUBTOPICS", 3)
 
+        # OpenAI
+        self.openai_api_key = None
+        self.openai_api_base = None
+        # Azure OpenAI
+        self.azure_openai_endpoint = None
+        self.azure_openai_api_key = None
+        self.openai_api_version = None
+        # Google
+        self.gemini_api_key = None
+
+        # Tavily
+        self.tavily_api_key = None
+
+        if kwargs:
+            for key, value in kwargs.items():
+                self.__dict__[key] = value
+
         self.load_config_file()
+
 
     def load_config_file(self) -> None:
         """Load the config file."""
@@ -40,4 +58,3 @@ class Config:
             config = json.load(f)
         for key, value in config.items():
             self.__dict__[key] = value
-

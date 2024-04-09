@@ -3,19 +3,19 @@ import os
 from colorama import Fore, Style
 from langchain_openai import ChatOpenAI
 
-
 class OpenAIProvider:
 
     def __init__(
         self,
         model,
         temperature,
-        max_tokens
+        max_tokens,
+        cfg # Config object
     ):
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
-        self.api_key = self.get_api_key()
+        self.api_key = cfg.openai_api_key if cfg.openai_api_key else self.get_api_key()
         self.llm = self.get_llm_model()
 
     def get_api_key(self):
@@ -68,5 +68,5 @@ class OpenAIProvider:
                     else:
                         print(f"{Fore.GREEN}{paragraph}{Style.RESET_ALL}")
                     paragraph = ""
-                    
+
         return response

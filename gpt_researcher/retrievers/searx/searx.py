@@ -10,14 +10,14 @@ class SearxSearch():
     """
     Tavily API Retriever
     """
-    def __init__(self, query):
+    def __init__(self, query, cfg=None):
         """
         Initializes the TavilySearch object
         Args:
             query:
         """
         self.query = query
-        self.api_key = self.get_api_key()
+        self.api_key = cfg.searx_url if hasattr(cfg, 'searx_url') else self.get_api_key()
         self.client = TavilyClient(self.api_key)
 
     def get_api_key(self):

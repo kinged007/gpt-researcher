@@ -12,6 +12,7 @@ from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
 from gpt_researcher.master.prompts import auto_agent_instructions, generate_subtopics_prompt
+from gpt_researcher.config import Config
 
 from .validators import Subtopics
 
@@ -42,6 +43,7 @@ async def create_chat_completion(
         llm_provider: Optional[str] = None,
         stream: Optional[bool] = False,
         websocket: WebSocket | None = None,
+        cfg: Optional[Config] = None,
 ) -> str:
     """Create a chat completion using the OpenAI API
     Args:
@@ -68,7 +70,8 @@ async def create_chat_completion(
     provider = ProviderClass(
         model,
         temperature,
-        max_tokens
+        max_tokens,
+        cfg
     )
 
     # create response

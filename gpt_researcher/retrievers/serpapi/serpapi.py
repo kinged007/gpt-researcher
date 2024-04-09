@@ -10,7 +10,7 @@ class SerpApiSearch():
     """
     SerpApi Retriever
     """
-    def __init__(self, query):
+    def __init__(self, query, cfg=None):
         """
         Initializes the SerpApiSearch object
         Args:
@@ -18,7 +18,7 @@ class SerpApiSearch():
         """
         raise NotImplementedError("SerpApiSearch is not fully implemented yet.")
         self.query = query
-        self.api_key = self.get_api_key()
+        self.api_key = cfg.serpapi_api_key if hasattr(cfg, 'serpapi_api_key') else self.get_api_key()
 
     def get_api_key(self):
         """

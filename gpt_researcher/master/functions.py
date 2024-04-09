@@ -69,7 +69,8 @@ async def choose_agent(query, cfg):
                 {"role": "system", "content": f"{auto_agent_instructions()}"},
                 {"role": "user", "content": f"task: {query}"}],
             temperature=0,
-            llm_provider=cfg.llm_provider
+            llm_provider=cfg.llm_provider,
+            cfg=cfg
         )
         agent_dict = json.loads(response)
         return agent_dict["server"], agent_dict["agent_role_prompt"]
@@ -96,7 +97,8 @@ async def get_sub_queries(query: str, agent_role_prompt: str, cfg, parent_query:
             {"role": "system", "content": f"{agent_role_prompt}"},
             {"role": "user", "content": generate_search_queries_prompt(query, parent_query, report_type, max_iterations=max_research_iterations)}],
         temperature=0,
-        llm_provider=cfg.llm_provider
+        llm_provider=cfg.llm_provider,
+        cfg=cfg
     )
     sub_queries = json.loads(response)
     return sub_queries
@@ -193,7 +195,8 @@ async def summarize_url(query, raw_data, agent_role_prompt, cfg):
                 {"role": "system", "content": f"{agent_role_prompt}"},
                 {"role": "user", "content": f"{generate_summary_prompt(query, raw_data)}"}],
             temperature=0,
-            llm_provider=cfg.llm_provider
+            llm_provider=cfg.llm_provider,
+            cfg=cfg
         )
     except Exception as e:
         print(f"{Fore.RED}Error in summarize: {e}{Style.RESET_ALL}")
@@ -245,7 +248,8 @@ async def generate_report(
             llm_provider=cfg.llm_provider,
             stream=True,
             websocket=websocket,
-            max_tokens=cfg.smart_token_limit
+            max_tokens=cfg.smart_token_limit,
+            cfg=cfg,
         )
     except Exception as e:
         print(f"{Fore.RED}Error in generate_report: {e}{Style.RESET_ALL}")
@@ -282,13 +286,13 @@ async def get_report_introduction(query, context, role, config, websocket=None):
             websocket=websocket,
             max_tokens=config.smart_token_limit
         )
-        
+
         return introduction
     except Exception as e:
         print(f"{Fore.RED}Error in generating report introduction: {e}{Style.RESET_ALL}")
 
     return ""
-    
+
 def extract_headers(markdown_text: str):
     # Function to extract headers from markdown text
 
@@ -355,7 +359,7 @@ def table_of_contents(markdown_text: str):
 def add_source_urls(report_markdown: str, visited_urls: set):
     """
     This function takes a Markdown report and a set of visited URLs as input parameters.
-    
+
     Args:
       report_markdown (str): The `add_source_urls` function takes in two parameters:
       visited_urls (set): Visited_urls is a set that contains URLs that have already been visited. This

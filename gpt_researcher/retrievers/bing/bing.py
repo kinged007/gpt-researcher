@@ -10,13 +10,14 @@ class BingSearch():
     """
     Bing Search Retriever
     """
-    def __init__(self, query):
+    def __init__(self, query, cfg=None):
         """
         Initializes the BingSearch object
         Args:
             query:
         """
         self.query = query
+        self.api_key = cfg.bing_api_key if hasattr(cfg, 'bing_api_key') else self.get_api_key()
         self.api_key = self.get_api_key()
 
     def get_api_key(self):
@@ -57,7 +58,7 @@ class BingSearch():
             "textFormat": "HTML",
             "safeSearch": "Strict"
         }
-        
+
         resp = requests.get(url, headers=headers, params=params)
 
         # Preprocess the results

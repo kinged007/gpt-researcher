@@ -11,15 +11,17 @@ class GoogleSearch:
     """
     Tavily API Retriever
     """
-    def __init__(self, query):
+    def __init__(self, query, cfg=None):
         """
         Initializes the TavilySearch object
         Args:
             query:
         """
         self.query = query
-        self.api_key = self.get_api_key() #GOOGLE_API_KEY
-        self.cx_key = self.get_cx_key() #GOOGLE_CX_KEY
+        self.api_key = cfg.google_api_key if hasattr(cfg, 'google_api_key') else self.get_api_key()
+        self.api_key = cfg.google_cx_key if hasattr(cfg, 'google_cx_key') else self.get_cx_key()
+        # self.api_key = self.get_api_key() #GOOGLE_API_KEY
+        # self.cx_key = self.get_cx_key() #GOOGLE_CX_KEY
         self.client = TavilyClient(self.api_key)
 
     def get_api_key(self):
